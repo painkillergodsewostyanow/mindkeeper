@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MindKeeper</title>
+    <link rel="stylesheet" href="{% static 'css/main_style.css' %}">
+    {% block css %}   {% endblock %}
+</head>
+<body>
+    <div class="container">
+        <div class="side_menu_block">
+            <div class="logo_place">
+                <a href=""><img src="{% static 'img/logo.png' %}" alt=""></a>
+            </div>
+
+            <div class="nav_bar">
+
+                <div>
+                    <img src="{% static 'img/for_test.svg' %}" alt="">
+                    <a href="">Ваше хранилище</a>
+                </div>
+                <div>
+                    <img src="{% static 'img/for_test.svg' %}" alt="">
+                    <a href="">Глобальное хранилище</a>
+                </div>
+
+            </div>
+
+        </div>
+        <div>
+
+            <div class="header">
+                <div class="search-form">
+                    <input class="search-form__txt" type="text" placeholder="Поиск">
+                    <button type="submit" class="search-form__btn">
+                        <img class="search-form__img" src="{% static 'img/search_icon.svg' %}" alt="image">
+                    </button>
+                </div>
+                <div class="profile">
+                    qwdqwdqwdqw
+                </div>
+            </div>
+
+            <div class="content">
+                            {% block content %}  {% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
