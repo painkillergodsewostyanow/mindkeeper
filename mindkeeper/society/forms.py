@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import \
-    UserCreationForm as DjangoUSerCreationForm,\
+    UserCreationForm as DjangoUserCreationForm,\
     AuthenticationForm as DjangoAuthenticationForm
 
 from django.core.exceptions import ValidationError
@@ -8,7 +8,7 @@ from .models import User
 from email_app.tasks import send_verify_email
 
 
-class UserCreationForm(DjangoUSerCreationForm):
+class UserCreationForm(DjangoUserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'phone_number', 'is_private', 'is_receive_notifications', 'image')

@@ -51,10 +51,11 @@ class VerifyEmailView(View):
         user = self.get_user(uidb64)
         if user and default_token_generator.check_token(user, token):
             user.is_email_verified = True
+            user.save()
             login(request, user)
             return redirect('main:index')
 
-        return render(request, 'society/invalid.html')
+        return render(request, 'society/invalid_token.html')
 
     @staticmethod
     def get_user(uidb64):
