@@ -1,11 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchVectorField, SearchVector
 from django.db import models
-from society.models import User
 
 
 class Themes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length=36)
     is_private = models.BooleanField(default=False)
 
@@ -27,7 +27,7 @@ class Themes(models.Model):
 
 
 class Cards(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()
 

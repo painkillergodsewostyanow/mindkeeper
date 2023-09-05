@@ -13,6 +13,7 @@ from society.views import VerifyEmailView
 class UserTestCase(TestCase):
 
     def test_user_reg_auth(self):
+
         # Регистрация
         registration_url = reverse('society:registration')
 

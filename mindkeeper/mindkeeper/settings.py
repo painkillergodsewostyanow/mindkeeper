@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'society',
     'email_app',
     'debug_toolbar',
+    'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

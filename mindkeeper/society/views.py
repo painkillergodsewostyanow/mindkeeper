@@ -1,13 +1,13 @@
 from django.contrib.auth import authenticate, login
 from .forms import AuthenticationForm
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import TemplateView
 
 from .forms import UserCreationForm
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from email_app.tasks import send_verify_email
 from .models import User
@@ -30,7 +30,7 @@ class UserRegistrationView(View):
             send_verify_email.delay(user.pk)
             return redirect('society:required_verify_email')
 
-        return redirect('main:index')
+        return render(request, self.template_name, {'form': form})
 
 
 class UserLoginView(LoginView):

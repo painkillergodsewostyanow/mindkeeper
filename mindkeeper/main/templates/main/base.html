@@ -32,19 +32,26 @@
         <div>
 
             <div class="header">
-                <div class="search-form">
-                    <input class="search-form__txt" type="text" placeholder="Поиск">
+                <form action="" class="search-form">
+                    <input class="search-form__txt" type="text" placeholder="Поиск...">
                     <button type="submit" class="search-form__btn">
                         <img class="search-form__img" src="{% static 'img/search_icon.svg' %}" alt="image">
                     </button>
-                </div>
+                </form>
                 <div class="profile">
-                    qwdqwdqwdqw
+                    <div class="name">
+                        painkillergod
+                    </div>
+
+                    <div class="avatar">
+                        <img src="{% static 'img/s7UNdCcfiOA.jpg' %}" alt="">
+                    </div>
+
                 </div>
             </div>
 
             <div class="content">
-                            {% block content %}  {% endblock %}
+                {% block content %}  {% endblock %}
             </div>
 
         </div>

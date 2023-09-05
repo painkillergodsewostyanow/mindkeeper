@@ -14,6 +14,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_receive_notifications = models.BooleanField(default=True)
     is_email_verified = models.BooleanField(default=False)
 
+    MAX_IMAGE_WIDTH = 600
+    MAX_IMAGE_HEIGHT = 900
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 

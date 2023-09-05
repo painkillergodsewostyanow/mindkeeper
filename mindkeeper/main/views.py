@@ -10,3 +10,5 @@ class IndexTemplateView(View):
             return render(request, 'main/index_for_authenticated.html')
         # TODO()
         return render(request, 'main/index_for_not_authenticated.html')
+
+
