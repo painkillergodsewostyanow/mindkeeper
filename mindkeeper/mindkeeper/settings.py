@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.urls import reverse_lazy
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +42,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
-    'society',
+    'users',
     'email_app',
     'debug_toolbar',
     'django_cleanup.apps.CleanupConfig',
@@ -88,11 +93,11 @@ WSGI_APPLICATION = 'mindkeeper.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'MINDKEEPER',
-        'USER': 'mindkeeper_user',
+        'NAME': 'mindkeeper_db',
+        'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5434',
     }
 }
 
@@ -160,10 +165,16 @@ DOMAIN_NAME = 'http://localhost:8000'
 
 # Users
 
-AUTH_USER_MODEL = 'society.User'
-AUTHENTICATION_BACKENDS = ('society.backends.AuthByUsernameOrEmailBackends',)
+AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ('users.backends.AuthByUsernameOrEmailBackends',)
 
 # Celery
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+
+LOGIN_REDIRECT_URL = reverse_lazy('main:index')
+LOGIN_URL = reverse_lazy('main:index')
+LOGOUT_REDIRECT_URL = reverse_lazy('main:index')
+LOGOUT_URL = reverse_lazy('main:index')

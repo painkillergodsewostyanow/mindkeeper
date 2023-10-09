@@ -3,18 +3,32 @@ from django.contrib.auth.forms import \
     UserCreationForm as DjangoUserCreationForm,\
     AuthenticationForm as DjangoAuthenticationForm
 
+from django import forms
+
 from django.core.exceptions import ValidationError
 from .models import User
 from email_app.tasks import send_verify_email
 
 
 class UserCreationForm(DjangoUserCreationForm):
+
+    username = forms.CharField(label='логин', widget=forms.TextInput(attrs={'class': 'form__input',
+                                                                            'placeholder': 'Имя'}))
+    password1 = forms.CharField(label='пароль', widget=forms.PasswordInput(attrs={'class': 'form__input',
+                                                                                  'placeholder': 'Пароль'}))
+    password2 = forms.CharField(label='пароль', widget=forms.PasswordInput(attrs={'class': 'form__input',
+                                                                                  'placeholder': 'Пароль'}))
+    email = forms.EmailField(label='почта', widget=forms.EmailInput(attrs={'class': 'form__input',                                                                'placeholder': ''}))
     class Meta:
         model = User
         fields = ('username', 'email', 'phone_number', 'is_private', 'is_receive_notifications', 'image')
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
+    username = forms.CharField(label='логин', widget=forms.TextInput(attrs={'class': 'form__input',
+                                                                            'placeholder': 'Имя или почта'}))
+    password = forms.CharField(label='пароль', widget=forms.PasswordInput(attrs={'class': 'form__input',
+                                                                                  'placeholder': 'Пароль'}))
 
     def clean(self):
         username = self.cleaned_data.get("username")

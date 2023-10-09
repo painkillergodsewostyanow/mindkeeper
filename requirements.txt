@@ -1,4 +1,7 @@
 django==4.2
-psycopg2
+psycopg2==2.9.8
 django-debug-toolbar
 django-cleanup
+python_dotenv
+celery[redis]
+Pillow

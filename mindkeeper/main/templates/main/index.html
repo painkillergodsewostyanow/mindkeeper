@@ -1,11 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="lib/boostrap-reboot-min.css">
-    <link rel="stylesheet" href="lib/boostrap-grid-min.css">
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="{% static 'css/lib/boostrap-reboot-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lib//boostrap-grid-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="{% static 'js/index.js' %}" defer></script>
     <title>MindkeepeR</title>
 </head>
 
@@ -19,10 +20,10 @@
                 <li><a href="#">Your storage</a></li>
                 <li><a href="#">INFO</a></li>
             </ul>
-            <div class="profile"><a href="../forms/log_reg_page.html">USERNAME</a>
+            <div class="profile"><a href="{% url 'users:log_reg_page' %}">USERNAME</a>
                     <ul class="profile_menu">
                         <li><a href="">Настройки</a></li>
-                        <li><a href="">Выйти</a></li>
+                        <li><a href="{% url 'users:logout' %}">Выйти</a></li>
                     </ul>
             </div>
 

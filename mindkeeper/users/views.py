@@ -14,35 +14,66 @@ from .models import User
 
 
 class LogRegView(View):
-    template_name = 'log_reg_page.html'
-    def get(self, request):
-        log_form = AuthenticationForm()
-        reg_form = UserCreationForm()
-        return render(request, self.template_name, {'log_form': log_form, 'reg_form': reg_form})
-
-# Create your views here.
-class UserRegistrationView(View):
-    template_name = 'users/registration.html'
+    template_name = 'users/log_reg_page.html'
 
     def get(self, request):
-        return render(request, self.template_name, {'form': UserCreationForm()})
-
-    def post(self, request):
-        form = UserCreationForm(self.request.POST, self.request.FILES)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
-            send_verify_email.delay(user.pk)
-            return redirect('users:required_verify_email')
-
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'log_form': AuthenticationForm(), 'reg_form': UserCreationForm()})
 
 
+def reg_user(request):
+    form = UserCreationForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password1']
+        user = authenticate(username=username, password=password)
+        send_verify_email.delay(user.pk)
+        return redirect('users:required_verify_email')
+
+    return render(request, 'users/log_reg_page.html',
+                  {'log_form': AuthenticationForm(), 'reg_form': UserCreationForm(request.POST)})
+
+
+# def log_user(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
+#             user = authenticate(username, password)
+#             login(request, user)
+#             return reverse_lazy('main:index')
+#
+#         print(form.errors)
+#         print(form.cleaned_data)
+#
+#         return render(request, 'users/log_reg_page.html', {
+#                           'log_form': AuthenticationForm(request.POST), 'reg_form': UserCreationForm()
+#                       })
+
+
+#
+# # Create your views here.
+# class UserRegistrationView(View):
+#
+#     def post(self, request):
+#         form = UserCreationForm(self.request.POST, self.request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password1']
+#             user = authenticate(username=username, password=password)
+#             send_verify_email.delay(user.pk)
+#             return redirect('users:required_verify_email')
+#
+#         # return render(request, self.template_name, {'form': form})
+#         #  TODO()
+#
+#
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
     form_class = AuthenticationForm
+    success_url = reverse_lazy('main:index')
 
     def get_success_url(self):
         return reverse_lazy('main:index')

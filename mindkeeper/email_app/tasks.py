@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
-from society.models import User
+from users.models import User
 
 
 @shared_task
@@ -32,7 +32,7 @@ def send_verify_email(user_pk):
         'protocol': 'http'
     }
 
-    message = render_to_string('society/verify_mail.html', context=context)
+    message = render_to_string('users/verify_mail.html', context=context)
 
     send_mail(
         subject='Подтверждение почты',

@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../../../mindkeeper_front/forms/log_reg_page_style.css">
+    <link rel="stylesheet" href="{% static 'css/log_reg_page_style.css' %}">
     <title>Авторизация</title>
-    <script src="../../../../mindkeeper_front/forms/log_reg_page.js" defer></script>
+    <script src="{% static 'js/log_reg_page.js' %}" defer></script>
 </head>
 <body>
 
@@ -23,30 +25,41 @@
 
         <div class="form-box">
 
-            <form action="" class="form form_signin">
+            <form action="{% url 'users:login' %}" class="form form_signin" method="POST">
                 <h3 class="form__title form__title_signin">Вход</h3>
+                {% csrf_token %}
+
                 <p>
-                    <input type="text" class="form__input">
+                    {{log_form.username}}
                 </p>
                 <p>
-                    <input type="password" class="form__input">
+                    {{log_form.password}}
                 </p>
                 <p>
                     <button class="form__btn">Войти</button>
                 </p>
+                {{log_form.error}}
                 <p>
                     <a href="" class="form__forgot_password">Восстановить пароль</a>
                 </p>
             </form>
 
-            <form action="" class="form form_signup">
+            <form action="{% url 'users:registration' %}" class="form form_signup" method="post">
                 <h3 class="form__title form__title_signup">Регистрация</h3>
+                {% csrf_token %}
                 <p>
-                    <input type="text" class="form__input">
+                    {{reg_form.username}}
                 </p>
                 <p>
-                    <input type="password" class="form__input">
+                    {{reg_form.email}}
                 </p>
+                <p>
+                    {{reg_form.password1}}
+                </p>
+                <p>
+                    {{reg_form.password2}}
+                </p>
+                {{reg_form.errors}}
                 <p>
                     <button class="form__btn form__btn__signup">Зарегистрироваться</button>
                 </p>
