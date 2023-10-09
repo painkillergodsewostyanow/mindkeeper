@@ -13,9 +13,16 @@ from email_app.tasks import send_verify_email
 from .models import User
 
 
+class LogRegView(View):
+    template_name = 'log_reg_page.html'
+    def get(self, request):
+        log_form = AuthenticationForm()
+        reg_form = UserCreationForm()
+        return render(request, self.template_name, {'log_form': log_form, 'reg_form': reg_form})
+
 # Create your views here.
 class UserRegistrationView(View):
-    template_name = 'society/registration.html'
+    template_name = 'users/registration.html'
 
     def get(self, request):
         return render(request, self.template_name, {'form': UserCreationForm()})
@@ -28,13 +35,13 @@ class UserRegistrationView(View):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             send_verify_email.delay(user.pk)
-            return redirect('society:required_verify_email')
+            return redirect('users:required_verify_email')
 
         return render(request, self.template_name, {'form': form})
 
 
 class UserLoginView(LoginView):
-    template_name = 'society/login.html'
+    template_name = 'users/login.html'
     form_class = AuthenticationForm
 
     def get_success_url(self):
@@ -42,7 +49,7 @@ class UserLoginView(LoginView):
 
 
 class VerifyEmailRequiredTemplateView(TemplateView):
-    template_name = 'society/required_verify_email.html'
+    template_name = 'users/required_verify_email.html'
 
 
 class VerifyEmailView(View):
@@ -55,7 +62,7 @@ class VerifyEmailView(View):
             login(request, user)
             return redirect('main:index')
 
-        return render(request, 'society/invalid_token.html')
+        return render(request, 'users/invalid_token.html')
 
     @staticmethod
     def get_user(uidb64):

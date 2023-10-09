@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class SocietyConfig(AppConfig):
+class UsersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'society'
+    name = 'users'
 
     def ready(self):
         from .signals import crop_user_image

@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models import Q
 
-from society.models import User
+from users.models import User
 
 
 class AuthByUsernameOrEmailBackends(object):

@@ -1,0 +1,98 @@
+.navbar{
+    background-color: #212529;
+}
+
+.navbar {
+    width: 100%;
+    height: 120px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+
+.navbar .container {
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-menu {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.navbar-menu li {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.navbar-menu li a {
+    display: inline-block;
+    text-decoration: none;
+    color: gray;
+    padding: 10px;
+
+}
+
+.navbar-menu li a:hover {
+    color: #024dbc;
+    transition: all .34s ease-in-out;
+
+}
+.navbar-wrapp {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.profile{
+    margin-left: 40px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.profile a {
+    text-decoration: none;
+    color: #024dbc;
+    font-weight: 700;
+}
+.profile a:hover{
+
+    color: blue;
+    transition: all .34s ease-in-out;
+
+}
+
+
+.navbar-brand{
+    font-weight: 700;
+    font-size: 44px;
+    text-decoration: snow;
+    color: #024dbc;
+}
+
+.navbar-brand:hover{
+
+    color: blue;
+    transition: all .34s ease-in-out;
+
+}
+body {
+    background-color: #212590;
+}
+
+.profile_menu * {
+    margin: 0;
+    padding: 0;
+}
+
+
+.profile_menu{
+    display: none;
+}
+
+.profile:hover .profile_menu{
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    display: block;
+}
